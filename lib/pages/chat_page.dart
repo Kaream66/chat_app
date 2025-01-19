@@ -15,9 +15,11 @@ class ChatPage extends StatelessWidget {
       FirebaseFirestore.instance.collection(kMessagesCollection);
   TextEditingController controller = TextEditingController();
 
+  ChatPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var email = ModalRoute.of(context)!.settings.arguments;
+    ModalRoute.of(context)!.settings.arguments;
     return StreamBuilder<QuerySnapshot>(
       stream: messages.orderBy(kCreatedAt, descending: true).snapshots(),
       builder: (context, snapshot) {
@@ -57,12 +59,10 @@ class ChatPage extends StatelessWidget {
                     reverse: true,
                     controller: _controller,
                     itemBuilder: (context, index) {
-                      return messagesList[index].id == email
-                          ? ChatBubble(
-                              message: messagesList[index],
-                              color: kPrimaryColor,
-                            )
-                          : ChatBubbleFromOtehers(message: messagesList[index]);
+                      return ChatBubble(
+                        message: messagesList[index],
+                        color: kPrimaryColor,
+                      );
                     },
                     itemCount: messagesList.length,
                   ),
@@ -75,7 +75,6 @@ class ChatPage extends StatelessWidget {
                       messages.add({
                         kMessage: data,
                         kCreatedAt: DateTime.now(),
-                        'id': email
                       });
                       controller.clear();
                       _controller.animateTo(0,
