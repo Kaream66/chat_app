@@ -1,6 +1,7 @@
 import 'package:chats_app/constants.dart';
 import 'package:chats_app/helper/show_snackBar.dart';
 import 'package:chats_app/pages/chat_page.dart';
+import 'package:chats_app/pages/login_page.dart';
 import 'package:chats_app/widgets/custom_button.dart';
 import 'package:chats_app/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -94,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       setState(() {});
                       try {
                         await registerUser();
-                        Navigator.pushNamed(context, ChatPage.id,
+                        Navigator.pushNamed(context, LoginPage.id,
                             arguments: email);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
