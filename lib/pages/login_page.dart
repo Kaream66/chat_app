@@ -88,6 +88,7 @@ class LoginPage extends StatelessWidget {
                     height: 8,
                   ),
                   CustomFormTextField(
+                    obscure: true,
                     onChanged: (data) {
                       password = data;
                     },
