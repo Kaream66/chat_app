@@ -3,8 +3,8 @@ class Message{
     final String id;
     Message(this.message, this.id);
 
-    factory Message.fromJason( jasonData){
-      return Message(jasonData['message']??'',jasonData['id']??'');
+    factory Message.fromJson( jsonData){
+      return Message(jsonData['message']??'',jsonData['id']??'');
     }
   }
 

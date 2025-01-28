@@ -48,13 +48,10 @@ class ChatPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: BlocConsumer<ChatCubit, ChatState>(
-              listener: (context, state) {
-                if (state is ChatSuccess) {
-                  messagesList = state.message;
-                }
-              },
+            child: BlocBuilder<ChatCubit, ChatState>(
               builder: (context, state) {
+                var messagesList =
+                    BlocProvider.of<ChatCubit>(context).messageList;
                 return ListView.builder(
                   reverse: true,
                   controller: _controller,
@@ -74,6 +71,8 @@ class ChatPage extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               onFieldSubmitted: (data) {
+                BlocProvider.of<ChatCubit>(context)
+                    .sendMessage(message: data, email: 'email');
                 controller.clear();
                 _controller.animateTo(0,
                     duration: const Duration(milliseconds: 450),

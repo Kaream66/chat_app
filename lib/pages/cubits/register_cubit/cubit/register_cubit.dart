@@ -9,7 +9,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   Future<void> registerUser(
       {required String email, required String password}) async {
-    emit(RegisterLoading());
+    //emit(RegisterLoading());
     try {
       UserCredential user = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);

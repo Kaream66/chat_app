@@ -42,6 +42,7 @@ class RegisterPage extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: formKey,
                 child: ListView(
                   children: [
@@ -102,6 +103,7 @@ class RegisterPage extends StatelessWidget {
                         if (formKey.currentState!.validate()) {
                           BlocProvider.of<RegisterCubit>(context)
                               .registerUser(email: email!, password: password!);
+                          Navigator.pushNamed(context, LoginPage.id);
                         }
                       },
                       text: 'REGISTER',

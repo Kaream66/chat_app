@@ -35,7 +35,7 @@ class ChatBubble extends StatelessWidget {
 }
 
 class ChatBubbleFromOtehers extends StatelessWidget {
-  ChatBubbleFromOtehers({super.key,required this.message });
+  const ChatBubbleFromOtehers({super.key,required this.message });
 
 
   final Message message;
