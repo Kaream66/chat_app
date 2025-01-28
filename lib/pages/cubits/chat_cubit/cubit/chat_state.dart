@@ -5,7 +5,9 @@ sealed class ChatState {}
 
 final class ChatInitial extends ChatState {}
 
+// ignore: must_be_immutable
 final class ChatSuccess extends ChatState {
   List<Message> message;
+
   ChatSuccess({required this.message});
 }

@@ -142,6 +142,7 @@ class RegisterPage extends StatelessWidget {
   }
 
   Future<void> registerUser() async {
+    // ignore: unused_local_variable
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email!, password: password!);
   }

@@ -21,7 +21,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ModalRoute.of(context)!.settings.arguments;
+   ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
       backgroundColor: Colors.white70,

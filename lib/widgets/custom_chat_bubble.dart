@@ -2,7 +2,7 @@ import 'package:chats_app/models/messages_model.dart';
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatelessWidget {
-    ChatBubble({super.key,required this.color,required this.message });
+    const ChatBubble({super.key,required this.color,required this.message });
 
    final Color color;
    final Message message;
