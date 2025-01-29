@@ -1,8 +1,8 @@
 import 'package:chats_app/constants.dart';
 import 'package:chats_app/helper/show_snackBar.dart';
 import 'package:chats_app/pages/chat_page.dart';
+import 'package:chats_app/pages/cubits/auth_cubit/cubit/auth_cubit.dart';
 import 'package:chats_app/pages/cubits/chat_cubit/cubit/chat_cubit.dart';
-import 'package:chats_app/pages/cubits/login_cubit/login_cubit.dart';
 import 'package:chats_app/pages/register_page.dart';
 import 'package:chats_app/widgets/custom_button.dart';
 import 'package:chats_app/widgets/custom_text_field.dart';
@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
           isLoading = false;
         }
       },
-      child:  ModalProgressHUD(
+      child: ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
           backgroundColor: kPrimaryColor,
@@ -101,8 +101,12 @@ class LoginPage extends StatelessWidget {
                   CustomButton(
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
+                        BlocProvider.of<AuthCubit>(context)
+                            .LoginUser(email: email!, password: password!);
                         Navigator.pushNamed(context, ChatPage.id);
-                      } else {}
+                      } else {
+                        showSnackBar(context, 'inCorrect Data');
+                      }
                     },
                     text: 'LOGIN',
                   ),
@@ -141,8 +145,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Future<void> signIn() async {
-  }
+  Future<void> signIn() async {}
 }
 //  try {
 //       await signIn();

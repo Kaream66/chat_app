@@ -21,7 +21,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   ModalRoute.of(context)!.settings.arguments;
+    ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
       backgroundColor: Colors.white70,
@@ -56,10 +56,14 @@ class ChatPage extends StatelessWidget {
                   reverse: true,
                   controller: _controller,
                   itemBuilder: (context, index) {
-                    return ChatBubble(
-                      message: messagesList[index],
-                      color: kPrimaryColor,
-                    );
+                    return messagesList[index].id == 'email'
+                        ? ChatBubble(
+                            message: messagesList[index],
+                            color: kPrimaryColor,
+                          )
+                        : ChatBubbleFromOtehers(
+                            message: messagesList[index],
+                          );
                   },
                   itemCount: messagesList.length,
                 );
