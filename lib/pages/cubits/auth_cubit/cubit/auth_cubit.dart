@@ -7,23 +7,6 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  Future<void> LoginUser({required String email, required String password}) async {
-    emit(LoginLoading());
-    try {
-      UserCredential user = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      emit(LoginSuccess());
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        emit(LoginFailure(errMessage: 'No user found .'));
-      } else if (e.code == 'wrong-password') {
-        emit(LoginFailure(errMessage: 'Wrong password .'));
-      }
-    } catch (e) {
-      emit(LoginFailure(errMessage: 'Something went wrong.'));
-    }
-  }
-
   Future<void> registerUser(
       {required String email, required String password}) async {
     //emit(RegisterLoading());
@@ -40,5 +23,12 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(RegisterFailure(errMessage: 'something went wrong'));
     }
+  }
+
+  
+  @override
+  void onChange(Change<AuthState> change) {
+    super.onChange(change);
+    print(change);
   }
 }

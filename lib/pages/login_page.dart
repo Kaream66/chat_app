@@ -1,7 +1,7 @@
 import 'package:chats_app/constants.dart';
 import 'package:chats_app/helper/show_snackBar.dart';
+import 'package:chats_app/pages/blocs/auth_bloc/bloc/auth_bloc.dart';
 import 'package:chats_app/pages/chat_page.dart';
-import 'package:chats_app/pages/cubits/auth_cubit/cubit/auth_cubit.dart';
 import 'package:chats_app/pages/cubits/chat_cubit/cubit/chat_cubit.dart';
 import 'package:chats_app/pages/register_page.dart';
 import 'package:chats_app/widgets/custom_button.dart';
@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
+    return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
@@ -43,6 +43,7 @@ class LoginPage extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Form(
+              
               key: formKey,
               child: ListView(
                 children: [
@@ -101,8 +102,8 @@ class LoginPage extends StatelessWidget {
                   CustomButton(
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        BlocProvider.of<AuthCubit>(context)
-                            .LoginUser(email: email!, password: password!);
+                        BlocProvider.of<AuthBloc>(context).add(
+                            LoginEvent(email: email!, password: password!));
                         Navigator.pushNamed(context, ChatPage.id);
                       } else {
                         showSnackBar(context, 'inCorrect Data');
